@@ -9,7 +9,5 @@ import kr.fast.community.entity.Comment;
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
 	Page<Comment> findAllByPostId(int postId, Pageable pageable);
-
 	
-
-} 
+}

@@ -22,7 +22,6 @@ import lombok.ToString;
 @ToString
 public class Comment {
 	
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)//DB에서 AUTO_INCREMENT로 기본키 생성
 	int id;
@@ -46,13 +45,12 @@ public class Comment {
 
 	//대댓인 경우
 	public Comment(String content, int postId, String memberId, Integer originId) {
-		this(content, postId, memberId); //밑 세줄과 같은 의미
-		//this.content = content;
-		//this.postId = postId;
-		//this.memberId = memberId;
+		this(content, postId, memberId);
+//		this.content = content;
+//		this.id = id;
+//		this.memberId = memberId;
 		this.originId = originId;
 	}
-	
 	//댓글인 경우
 	public Comment(String content, int postId, String memberId) {
 		this.content = content;
@@ -60,16 +58,13 @@ public class Comment {
 		this.memberId = memberId;
 		this.createdAt = LocalDateTime.now();
 		this.isDeleted = "N";
-		
 	}
 	
-	             //저장 후 실행되는 메서드 (JPA 콜백)
-	@PostPersist //댓글을 저장 후 originId가 null이면 id로 채워주는 작업해주는 Jpa코드
-	public void initOriginId() {
+	@PostPersist //저장 후 실행되는 메서드(JPA 콜백)
+	public void initOriginId() {	
 		//댓글인 경우(originId가 null) originId를 id로 수정
 		if(this.originId == null) {
 			this.originId = this.id;
 		}
-		
 	}
 }

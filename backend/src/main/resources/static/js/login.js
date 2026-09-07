@@ -54,3 +54,4 @@ function changeInput(e){
 	const {name, value} = e.target;
 	member[name] = value;
 }
+
